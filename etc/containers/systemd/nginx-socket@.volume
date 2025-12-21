@@ -1,0 +1,6 @@
+[Volume]
+Device=tmpfs
+Options=mode=1700,context=system_u:object_r:container_file_t:s0
+ServiceName=nginx-socket-volume@
+Type=tmpfs
+VolumeName=nginx-%i-socket

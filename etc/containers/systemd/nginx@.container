@@ -1,0 +1,13 @@
+[Container]
+AutoUpdate=registry
+ContainerName=nginx-%i
+Image=dhi.io/nginx:1
+Mount=type=tmpfs,target=/var/cache/nginx,chown,tmpfs-mode=1755
+Mount=type=tmpfs,target=/run/nginx,chown,tmpfs-mode=1755
+Pull=newer
+ReadOnly=true
+ReloadSignal=SIGHUP
+Secret=nginx-%i-config,target=/etc/nginx/nginx.conf,uid=65532,gid=65532,mode=0400
+
+[Service]
+Restart=always
