@@ -1,0 +1,5 @@
+[Volume]
+GID=65532
+ServiceName=nginx-config-volume@
+UID=65532
+VolumeName=nginx-%i-config
