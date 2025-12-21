@@ -10,9 +10,8 @@ jobs:
     steps:
     - id: generate-tags
       run: |
-        NGINX_TOKEN="$(curl 'https://dhi.io/token?scope=repository:nginx:pull&service=registry.docker.io' --user "${{ secrets.DOCKER_HUB_USER }}:${{ secrets.DOCKER_HUB_PASS }}" --silent | jq --raw-output '.token')"
-        NGINX_VERSION_FULL="$(curl https://dhi.io/v2/nginx/manifests/1 -H "Authorization: Bearer $TOKEN" -H 'Accept: application/vnd.oci.image.index.v1+json' --silent | jq --raw-output '.annotations["org.opencontainers.image.version"]')"
-        NGINX_VERSION="${NGINX_VERSION_FULL%%-*}"
+        NGINX_TOKEN="$(curl 'https://ghcr.io/token?scope=repository:nginx/nginx-unprivileged:pull&service=ghcr.io' --silent | jq --raw-output '.token')"
+        NGINX_VERSION="$(curl https://ghcr.io/v2/nginx/nginx-unprivileged/manifests/1 -H "Authorization: Bearer $NGINX_TOKEN" -H 'Accept: application/vnd.oci.image.index.v1+json' --silent | jq --raw-output '.annotations["org.opencontainers.image.version"]')"
         NGINX_DAV_EXT_MODULE_URL="$(curl --head https://github.com/arut/nginx-dav-ext-module/releases/latest --output /dev/null --write-out '%{redirect_url}')"
         NGINX_DAV_EXT_MODULE_VERSION="${NGINX_DAV_EXT_MODULE_URL##*/v}"
         printf 'TAG=%s\nNGINX_VERSION=%s\n' "nginx-${NGINX_VERSION}_nginx-dav-ext-module-$NGINX_DAV_EXT_MODULE_VERSION" "$NGINX_VERSION" >>"$GITHUB_OUTPUT"
