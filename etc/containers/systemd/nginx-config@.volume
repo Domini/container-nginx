@@ -1,0 +1,3 @@
+[Volume]
+ServiceName=nginx-config-volume@
+VolumeName=nginx-%i-config
