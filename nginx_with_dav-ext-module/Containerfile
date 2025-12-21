@@ -1,10 +1,10 @@
-#   NGINX_VERSION="$(TOKEN="$(curl 'https://dhi.io/token?scope=repository:nginx:pull&service=registry.docker.io' --user "$USER_PASS" | jq --raw-output '.token')"; VERSION_FULL="$(curl https://dhi.io/v2/nginx/manifests/1 -H "Authorization: Bearer $TOKEN" -H 'Accept: application/vnd.oci.image.index.v1+json' | jq --raw-output '.annotations["org.opencontainers.image.version"]')"; printf '%s' "${VERSION_FULL%%-*}")"
+#   NGINX_VERSION="$(TOKEN="$(curl 'https://ghcr.io/token?scope=repository:nginx/nginx-unprivileged:pull&service=ghcr.io' | jq --raw-output '.token')"; curl https://ghcr.io/v2/nginx/nginx-unprivileged/manifests/1 -H "Authorization: Bearer $TOKEN" -H 'Accept: application/vnd.oci.image.index.v1+json' | jq --raw-output '.annotations["org.opencontainers.image.version"]')"
 ARG NGINX_VERSION
 #   NGINX_DAV_EXT_MODULE_VERSION="$(URL="$(curl --head https://github.com/arut/nginx-dav-ext-module/releases/latest --output /dev/null --write-out '%{redirect_url}')"; printf '%s' "${URL##*/v}")"
 ARG NGINX_DAV_EXT_MODULE_VERSION
 
 FROM ghcr.io/domini/nginx-dav-ext-module:nginx-${NGINX_VERSION}_nginx-dav-ext-module-$NGINX_DAV_EXT_MODULE_VERSION AS nginx_with_dav-ext-module
 
-FROM dhi.io/nginx:$NGINX_VERSION
+FROM ghcr.io/nginx/nginx-unprivileged:$NGINX_VERSION
 
 COPY --from=nginx_with_dav-ext-module --parents /usr/lib/nginx/modules/ngx_http_dav_ext_module*.so /
