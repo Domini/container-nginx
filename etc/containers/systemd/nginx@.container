@@ -1,0 +1,14 @@
+[Container]
+AddCapability=CAP_NET_BIND_SERVICE
+AutoUpdate=registry
+ContainerName=nginx-%i
+Image=dhi.io/nginx:1
+Mount=type=volume,source=nginx-config@.volume,target=/etc/nginx,ro
+Mount=type=tmpfs,target=/var/cache/nginx,chown,tmpfs-mode=1755
+Mount=type=tmpfs,target=/var/run/nginx,chown,tmpfs-mode=1755
+Pull=newer
+ReadOnly=true
+ReloadSignal=SIGHUP
+
+[Service]
+Restart=always

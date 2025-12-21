@@ -1,0 +1,4 @@
+[Volume]
+User=65532
+ServiceName=nginx-config-volume@
+VolumeName=nginx-%i-config
