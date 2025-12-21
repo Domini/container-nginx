@@ -1,0 +1,10 @@
+43a44,45
+>     - libxml2
+>     - libxslt1.1
+80a83,88
+>   artifacts:
+>     - name: ghcr.io/domini/nginx-dav-ext-module:nginx-%NGINX_VERSION%_nginx-dav-ext-module-%NGINX_DAV_EXT_MODULE_VERSION%
+>       includes:
+>         - usr/lib/nginx/modules/ngx_http_dav_ext_module.so
+>       uid: 0
+>       gid: 0
