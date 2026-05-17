@@ -1,0 +1,4 @@
+[Volume]
+ServiceName=nginx-dav-config-volume@
+VolumeName=nginx-dav-%i-config
+UID=101
