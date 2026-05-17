@@ -1,4 +1,4 @@
 [Volume]
+PodmanArgs=--uid 101
 ServiceName=nginx-dav-config-volume@
 VolumeName=nginx-dav-%i-config
-UID=101
